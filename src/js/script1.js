@@ -75,30 +75,29 @@
         initAccordion() {
             const thisProduct = this;
             /* find the clickable trigger (the element that should react to clicking) */
-            let product = document.querySelector('.product');
-            console.log(product);
-            let clicked = product.querySelector(select.menuProduct.clickable);
-            /* START: click event listener to trigger */
-            clicked.addEventListener('click', function(event) {
-                /* prevent default action for event */
-                console.log('clicked');
-                event.preventDefault();
-                /* toggle active class on element of thisProduct */
-                thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-                /* find all active products */
-                let allActiveProducts = document.querySelectorAll(classNames.menuProduct.wrapperActive);
-                /* START LOOP: for each active product */
-                for (let activeProduct of allActiveProducts) {
-                    /* START: if the active product isn't the element of thisProduct */
-                    if (activeProduct == thisProduct.element) {
-                        /* remove class active for the active product */
-                        activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+            let clickeds = document.querySelectorAll(select.menuProduct.clickable);
+            for (let clicked of clickeds) {
+                /* START: click event listener to trigger */
+                clicked.addEventListener('click', function(event) {
+                    /* prevent default action for event */
+                    console.log('clicked');
+                    event.preventDefault();
+                    /* toggle active class on element of thisProduct */
+                    thisProduct.element.classList.toggle('active');
+                    /* find all active products */
+                    let allActiveProducts = document.querySelectorAll('active');
+                    /* START LOOP: for each active product */
+                    for (let activeProduct of allActiveProducts) {
+                        /* START: if the active product isn't the element of thisProduct */
+                        if (activeProduct != thisProduct.element) {
+                            /* remove class active for the active product */
+                            activeProduct.classList.remove('active');
+                        }
+                        /* END: if the active product isn't the element of thisProduct */
                     }
-                    /* END: if the active product isn't the element of thisProduct */
-                }
-                /* END LOOP: for each active product */
-            });
-
+                    /* END LOOP: for each active product */
+                });
+            }
             /* END: click event listener to trigger */
         }
     }
