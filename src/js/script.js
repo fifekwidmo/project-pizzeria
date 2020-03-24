@@ -63,9 +63,13 @@
         readerInMenu() {
             const thisProduct = this;
             // generate HTML based on template
+            const generatedHTML = templates.menuProduct(thisProduct.data);
             // create element using utills.CreateElementFromHTML
+            thisProduct.element = utils.createDOMFromHTML(generatedHTML);
             // find menu containerOf
+            const menuContainer = document.querySelector(select.containerOf.menu);
             // add element to menu
+            menuContainer.appendChild(thisProduct.element);
         }
     }
 
