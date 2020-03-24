@@ -58,6 +58,7 @@
             thisProduct.id = id;
             thisProduct.data = data;
             thisProduct.readerInMenu();
+            thisProduct.initAccordion();
             console.log('new Product:', thisProduct);
         }
         readerInMenu() {
@@ -71,7 +72,35 @@
             // add element to menu
             menuContainer.appendChild(thisProduct.element);
         }
+        initAccordion(event) {
+            const thisProduct = this;
+            /* find the clickable trigger (the element that should react to clicking) */
+            let clicked = document.querySelector(select.menuProduct.clickable);
+            /* START: click event listener to trigger */
+            clicked.addEventListener('click', function() {
+                /* prevent default action for event */
+                event.preventDefault();
+                /* toggle active class on element of thisProduct */
+                thisProduct
+                /* find all active products */
+                const allActiveProducts = document.querySelectorAll('.product .active');
+                /* START LOOP: for each active product */
+
+                /* START: if the active product isn't the element of thisProduct */
+
+                /* remove class active for the active product */
+
+                /* END: if the active product isn't the element of thisProduct */
+
+                /* END LOOP: for each active product */
+
+            })
+
+
+            /* END: click event listener to trigger */
+        }
     }
+
 
 
     const app = {
