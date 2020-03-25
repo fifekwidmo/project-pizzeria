@@ -74,43 +74,30 @@
         }
         initAccordion() {
             const thisProduct = this;
-            /* find the clickable trigger (the element that should react to clicking) */
             let product = document.querySelector('.product');
             console.log(product);
             let clicked = thisProduct.element.querySelector(select.menuProduct.clickable);
-            /* START: click event listener to trigger */
             clicked.addEventListener('click', function(event) {
-                /* prevent default action for event */
                 console.log('clicked');
                 event.preventDefault();
-                /* toggle active class on element of thisProduct */
                 thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-                /* find all active products */
-                let allActiveProducts = product.querySelectorAll(classNames.menuProduct.wrapperActive);
-                /* START LOOP: for each active product */
+                let allActiveProducts = document.querySelectorAll(select.all.menuProducts);
                 for (let activeProduct of allActiveProducts) {
-                    /* START: if the active product isn't the element of thisProduct */
+
                     if (activeProduct != thisProduct.element) {
-                        /* remove class active for the active product */
+
                         activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
                     }
-                    /* END: if the active product isn't the element of thisProduct */
                 }
-                /* END LOOP: for each active product */
             });
-
-            /* END: click event listener to trigger */
         }
     }
-
-
-
     const app = {
         initMenu: function() {
             const thisApp = this;
             console.log('thisApp.data:', thisApp.data);
             for (let productData in thisApp.data.products) {
-                new Product(productData, thisApp.data.products[productData])
+                new Product(productData, thisApp.data.products[productData]);
             }
         },
         initData: function() {
