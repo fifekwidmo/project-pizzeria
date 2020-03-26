@@ -165,7 +165,7 @@
             /*multiply price by amount*/
 
             // tu jest blad
-            price *= thisProduct.amountWidget.value;
+            // price *= thisProduct.amountWidget.value;
             thisProduct.element.querySelector('.price').innerHTML = price;
         }
 
