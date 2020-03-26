@@ -82,6 +82,7 @@
             thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
             thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
             thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+            thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
         }
         initAccordion() {
             const thisProduct = this;
@@ -125,7 +126,14 @@
             let price = dataSource.products[thisProduct.id].price;
             for (let param in dataSource.products[thisProduct.id].params) {
                 for (let option in dataSource.products[thisProduct.id].params[param].options) {
+                    const img = this.imageWrapper.querySelector(`.${param}-${option}`);
+                    if (img) {
+                        img.classList.remove(classNames.menuProduct.imageVisible);
+                    }
                     if (formData[param]) {
+                        if (formData[param].includes(option) && img) {
+                            img.classList.add(classNames.menuProduct.imageVisible);
+                        }
                         if (formData[param].includes(option) && !dataSource.products[thisProduct.id].params[param].options[option].default) {
                             price = price + dataSource.products[thisProduct.id].params[param].options[option].price;
                         } else if (!formData[param].includes(option) && dataSource.products[thisProduct.id].params[param].options[option].default) {
