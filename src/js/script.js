@@ -129,7 +129,10 @@
             const thisProduct = this;
 
             thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+            // tu jest blad?
 
+
+            thisProduct.amountWidgetElem.addEventListener('updated', thisProduct.processOrder());
 
 
         }
@@ -159,6 +162,10 @@
                     }
                 }
             }
+            /*multiply price by amount*/
+
+            // tu jest blad
+            price *= thisProduct.amountWidget.value;
             thisProduct.element.querySelector('.price').innerHTML = price;
         }
 
@@ -193,7 +200,7 @@
             thisWidget.announce();
         }
 
-        //zdefiniowalem powyzej setValue to czemu jest zle?
+        //tu jest blad
 
         initActions() {
             const thisWidget = this;
