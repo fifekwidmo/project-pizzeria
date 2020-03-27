@@ -61,10 +61,11 @@
             thisProduct.getElements();
             thisProduct.initAccordion();
             thisProduct.initOrderForm();
+            thisProduct.initAmountWidget();
             thisProduct.processOrder();
 
             // Na koniec, w konstruktorze klasy Produkt wywołaj tę metodę, tuż przed wywołaniem metody processOrder.
-            thisProduct.initAmountWidget();
+
 
             console.log('new Product:', thisProduct);
         }
@@ -127,17 +128,12 @@
             // Następnie, w klasie Product tworzymy nową metodę initAmountWidget
         initAmountWidget() {
             const thisProduct = this;
-
             thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
             // tu jest blad?
-
-
-            thisProduct.amountWidgetElem.addEventListener('updated', thisProduct.processOrder());
-
-
+            thisProduct.amountWidgetElem.addEventListener('updated', function() {
+                thisProduct.processOrder();
+            });
         }
-
-
         processOrder() {
             const thisProduct = this;
             const formData = utils.serializeFormToObject(thisProduct.form);
@@ -163,9 +159,9 @@
                 }
             }
             /*multiply price by amount*/
-
+            console.log(thisProduct);
             // tu jest blad
-            // price *= thisProduct.amountWidget.value;
+            price *= thisProduct.amountWidget.value;
             thisProduct.element.querySelector('.price').innerHTML = price;
         }
 
@@ -178,7 +174,7 @@
                 thisWidget.getElements(element);
                 // Następnie wywołamy tę metodę w konstruktorze, pod wywołaniem metody getElements.
                 thisWidget.setValue(thisWidget.input.value);
-
+                thisWidget.initActions();
 
                 console.log('AmountWidget:', thisWidget);
                 console.log('AmountWidget:', element);
@@ -199,29 +195,30 @@
             thisWidget.input.value = thisWidget.value;
             thisWidget.announce();
         }
-
-        //tu jest blad
-
         initActions() {
+            console.log('ddd');
             const thisWidget = this;
-            thisWidget.input.addEventListener('change', thisWidget.setValue(thisWidget.input.value));
+            thisWidget.input.addEventListener('change', function() {
+                thisWidget.setValue(thisWidget.input.value);
+            });
+            thisWidget.linkDecrease.addEventListener('click', function() {
+                thisWidget.setValue(thisWidget.value - 1);
+                event.preventDefault();
+            });
+            thisWidget.linkIncrease.addEventListener('click', function() {
 
-            thisWidget.linkDecrease.addEventListener('click', thisWidget.setValue(thisWidget.value - 1), event);
-            event.preventDefault();
-            thisWidget.linkIncrease.addEventListener('click', thisWidget.setValue(thisWidget.value + 1), event);
-            event.preventDefault();
+                console.log('ddd');
 
-
+                thisWidget.setValue(thisWidget.value + 1);
+                event.preventDefault();
+            });
         }
-
         announce() {
             const thisWidget = this;
             const event = new Event('updated');
             thisWidget.element.dispatchEvent(event);
         }
-
     }
-
     const app = {
         initMenu: function() {
             const thisApp = this;
