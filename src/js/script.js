@@ -169,17 +169,16 @@
     // Dodajemy deklarację klasy przed obiektem app.
     class AmountWidget {
         constructor(element) {
-                const thisWidget = this;
-                // W konstruktorze, nad console.log, dodajemy wywołanie tej metody:
-                thisWidget.getElements(element);
-                // Następnie wywołamy tę metodę w konstruktorze, pod wywołaniem metody getElements.
-                thisWidget.setValue(thisWidget.input.value);
-                thisWidget.initActions();
-
-                console.log('AmountWidget:', thisWidget);
-                console.log('AmountWidget:', element);
-            }
-            // Podobnie jak w klasie Product, stworzymy metodę getElements
+            const thisWidget = this;
+            // W konstruktorze, nad console.log, dodajemy wywołanie tej metody:
+            thisWidget.value = settings.amountWidget.defaultValue;
+            console.log(thisWidget.value);
+            thisWidget.getElements(element);
+            thisWidget.setValue(thisWidget.input.value);
+            thisWidget.initActions();
+            console.log('AmountWidget:', thisWidget);
+            console.log('AmountWidget:', element);
+        }
         getElements(element) {
             const thisWidget = this;
             thisWidget.element = element;
@@ -190,10 +189,13 @@
         setValue(value) {
             const thisWidget = this;
             const newValue = parseInt(value);
-            // To do add valdiation
-            thisWidget.value = newValue;
+            if (newValue != thisWidget.value &&
+                newValue >= settings.amountWidget.defaultMin &&
+                newValue <= settings.amountWidget.defaultMax) {
+                thisWidget.value = newValue;
+                thisWidget.announce();
+            }
             thisWidget.input.value = thisWidget.value;
-            thisWidget.announce();
         }
         initActions() {
             console.log('ddd');
