@@ -99,21 +99,13 @@
             thisProduct.initOrderForm();
             thisProduct.initAmountWidget();
             thisProduct.processOrder();
-
-            // Na koniec, w konstruktorze klasy Produkt wywołaj tę metodę, tuż przed wywołaniem metody processOrder.
-
-
             console.log('new Product:', thisProduct);
         }
         readerInMenu() {
             const thisProduct = this;
-            // generate HTML based on template
             const generatedHTML = templates.menuProduct(thisProduct.data);
-            // create element using utills.CreateElementFromHTML
             thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-            // find menu containerOf
             const menuContainer = document.querySelector(select.containerOf.menu);
-            // add element to menu
             menuContainer.appendChild(thisProduct.element);
         }
         getElements() {
@@ -124,13 +116,11 @@
             thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
             thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
             thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-            // W metodzie getElements dodaj właściwość thisProduct.amountWidgetElem
             thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
 
         }
         initAccordion() {
             const thisProduct = this;
-            // console.log(product);
             let clicked = thisProduct.accordionTrigger;
             clicked.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -144,29 +134,27 @@
             });
         }
         initOrderForm() {
-                const thisProduct = this;
-                thisProduct.form.addEventListener('submit', function(event) {
-                    event.preventDefault();
+            const thisProduct = this;
+            thisProduct.form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                thisProduct.processOrder();
+            });
+
+            for (let input of thisProduct.formInputs) {
+                input.addEventListener('change', function() {
                     thisProduct.processOrder();
                 });
-
-                for (let input of thisProduct.formInputs) {
-                    input.addEventListener('change', function() {
-                        thisProduct.processOrder();
-                    });
-                }
-
-                thisProduct.cartButton.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    thisProduct.processOrder();
-                });
-
             }
-            // Następnie, w klasie Product tworzymy nową metodę initAmountWidget
+
+            thisProduct.cartButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                thisProduct.processOrder();
+            });
+
+        }
         initAmountWidget() {
             const thisProduct = this;
             thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-            // tu jest blad?
             thisProduct.amountWidgetElem.addEventListener('updated', function() {
                 thisProduct.processOrder();
             });
@@ -197,17 +185,13 @@
             }
             /*multiply price by amount*/
             console.log(thisProduct);
-            // tu jest blad
             price *= thisProduct.amountWidget.value;
             thisProduct.element.querySelector('.price').innerHTML = price;
         }
-
     }
-    // Dodajemy deklarację klasy przed obiektem app.
     class AmountWidget {
         constructor(element) {
             const thisWidget = this;
-            // W konstruktorze, nad console.log, dodajemy wywołanie tej metody:
             thisWidget.value = settings.amountWidget.defaultValue;
             console.log(thisWidget.value);
             thisWidget.getElements(element);
@@ -262,9 +246,7 @@
     class Cart {
         constructor(element) {
             const thisCart = this;
-
             thisCart.products = [];
-
             thisCart.getElements(element);
             console.log('new Cart', thisCart);
             thisCart.initActions();
@@ -299,7 +281,6 @@
 
         initCart: function() {
             const thisApp = this;
-
             const cartElem = document.querySelector(select.containerOf.cart);
             thisApp.cart = new Cart(cartElem);
         },
