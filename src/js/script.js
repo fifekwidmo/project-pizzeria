@@ -149,6 +149,7 @@
             thisProduct.cartButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 thisProduct.processOrder();
+                thisProduct.addToCart();
             });
 
         }
@@ -162,6 +163,7 @@
         processOrder() {
             const thisProduct = this;
             const formData = utils.serializeFormToObject(thisProduct.form);
+            thisProduct.params = {};
             let price = dataSource.products[thisProduct.id].price;
             for (let param in dataSource.products[thisProduct.id].params) {
                 for (let option in dataSource.products[thisProduct.id].params[param].options) {
@@ -173,6 +175,14 @@
                         if (formData[param].includes(option) && img) {
                             img.classList.add(classNames.menuProduct.imageVisible);
                         }
+                        // przed petla gdzie dodaje obrazek
+                        if (!thisProduct.params[param]) {
+                            thisProduct.params[param] = {
+                                label: dataSource.products[this.id].params[param].label,
+                                options: {},
+                            };
+                        }
+                        thisProduct.params[param].options[option] = dataSource.products[this.id].params[param].options[option].label;
                         if (formData[param].includes(option) && !dataSource.products[thisProduct.id].params[param].options[option].default) {
                             price = price + dataSource.products[thisProduct.id].params[param].options[option].price;
                         } else if (!formData[param].includes(option) && dataSource.products[thisProduct.id].params[param].options[option].default) {
@@ -184,9 +194,19 @@
                 }
             }
             /*multiply price by amount*/
-            console.log(thisProduct);
-            price *= thisProduct.amountWidget.value;
-            thisProduct.element.querySelector('.price').innerHTML = price;
+            thisProduct.priceSingle = price;
+            thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+            /* set the contents of thisProduct.priceElem to be the value of variable price */
+            thisProduct.priceElem.innerHTML = thisProduct.price;
+            console.log(thisProduct.params);
+        }
+
+        addToCart() {
+            const thisProduct = this;
+            thisProduct.name = thisProduct.data.name;
+            thisProduct.amount = thisProduct.amountWidget.value;
+
+            app.cart.add(thisProduct);
         }
     }
     class AmountWidget {
@@ -263,6 +283,10 @@
             thisCart.dom.toggleTrigger.addEventListener('click', function() {
                 thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
             });
+        }
+        add(menuProduct) {
+            //const thisCart = this;
+            console.log('adding product', menuProduct);
         }
     }
 
