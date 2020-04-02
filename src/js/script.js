@@ -55,7 +55,6 @@
         // CODE ADDED END
     };
 
-
     const classNames = {
         menuProduct: {
             wrapperActive: 'active',
@@ -329,7 +328,6 @@
             thisCart.dom.productList.removeChild(cartProduct.dom.wrapper);
             thisCart.update();
         }
-
     }
 
     class CartProduct {
@@ -350,15 +348,10 @@
         getElements(element) {
             const thisCartProduct = this;
             thisCartProduct.dom = {};
-
             thisCartProduct.dom.wrapper = element;
-
             thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
-
             thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
-
             thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
-
             thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
         }
         initAmountWidget() {
@@ -373,21 +366,17 @@
             });
         }
 
-
         initActions() {
             const thisCartProduct = this;
             thisCartProduct.dom.edit.addEventListener('click', function() {
                 event.preventDefault();
             });
-
             thisCartProduct.dom.remove.addEventListener('click', function() {
                 event.preventDefault();
                 thisCartProduct.remove();
                 console.log('remove');
             });
         }
-
-
         remove() {
             const thisCartProduct = this;
 
