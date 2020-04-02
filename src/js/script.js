@@ -285,7 +285,7 @@
             const generatedHTML = templates.cartProduct(menuProduct);
             const generatedDOM = utils.createDOMFromHTML(generatedHTML);
             thisCart.dom.productList.appendChild(generatedDOM);
-            thisCart.products.push(menuProduct);
+            thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
             console.log('thisCart.product', thisCart.products);
         }
     }
@@ -299,10 +299,8 @@
             thisCartProduct.priceSingle = menuProduct.priceSingle;
             thisCartProduct.amount = menuProduct.amount;
             thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
-
-
             thisCartProduct.getElements(element);
-
+            thisCartProduct.initAmountWidget();
             console.log('new CartProduct', thisCartProduct);
             console.log('productData', menuProduct);
         }
@@ -312,13 +310,24 @@
 
             thisCartProduct.dom.wrapper = element;
 
-            thisCartProduct.dom.amountWidget = document.querySelector(select.cartProduct.amountWidget);
+            thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
 
-            thisCartProduct.dom.price = document.querySelector(select.cartProduct.price);
+            thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
 
-            thisCartProduct.dom.edit = document.querySelector(select.cartProduct.edit);
+            thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
 
-            thisCartProduct.dom.remove = document.querySelector(select.cartProduct.remove);
+            thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+        }
+        initAmountWidget() {
+            const thisCartProduct = this;
+            thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+            thisCartProduct.dom.amountWidget.addEventListener('updated', function() {
+                // thisCartProduct.processOrder();
+                thisCartProduct.amount = thisCartProduct.amountWidget.value;
+                thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
+                // potencjalny blad
+                thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+            });
         }
     }
 
