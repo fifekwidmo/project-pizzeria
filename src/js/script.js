@@ -317,6 +317,15 @@
             // console.log('thisCart.product', thisCart.products);
             thisCart.update();
         }
+        remove(cartProduct) {
+            const thisCart = this;
+            const index = thisCart.products.indexOf(cartProduct);
+            thisCart.products.splice(index, 1);
+            console.log(cartProduct.dom.wrapper);
+            console.log(thisCart.dom.productList);
+            thisCart.dom.productList.removeChild(cartProduct.dom.wrapper);
+            thisCart.update();
+        }
 
     }
 
