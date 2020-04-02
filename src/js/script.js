@@ -304,6 +304,9 @@
             thisCart.dom.toggleTrigger.addEventListener('click', function() {
                 thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
             });
+            thisCart.dom.productList.addEventListener('updated', function() {
+                thisCart.update();
+            });
         }
         add(menuProduct) {
             const thisCart = this;
@@ -328,6 +331,7 @@
             thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
             thisCartProduct.getElements(element);
             thisCartProduct.initAmountWidget();
+            thisCartProduct.initActions();
             // console.log('new CartProduct', thisCartProduct);
             // console.log('productData', menuProduct);
         }
@@ -355,6 +359,33 @@
                 // potencjalny blad
                 thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
             });
+        }
+
+
+        initActions() {
+            const thisCartProduct = this;
+            thisCartProduct.dom.edit.addEventListener('click', function() {
+                event.preventDefault();
+            });
+
+            thisCartProduct.dom.remove.addEventListener('click', function() {
+                event.preventDefault();
+                thisCartProduct.remove();
+                console.log('remove');
+            });
+        }
+
+
+        remove() {
+            const thisCartProduct = this;
+
+            const event = new CustomEvent('remove', {
+                bubbles: true,
+                detail: {
+                    cartProduct: thisCartProduct,
+                }
+            });
+            thisCartProduct.dom.wrapper.dispatchEvent(event);
         }
     }
 
