@@ -262,6 +262,7 @@
         constructor(element) {
             const thisCart = this;
             thisCart.products = [];
+            thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
             thisCart.getElements(element);
             // console.log('new Cart', thisCart);
             thisCart.initActions();
@@ -286,7 +287,21 @@
             const generatedDOM = utils.createDOMFromHTML(generatedHTML);
             thisCart.dom.productList.appendChild(generatedDOM);
             thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-            console.log('thisCart.product', thisCart.products);
+            // console.log('thisCart.product', thisCart.products);
+            thisCart.update();
+        }
+        update() {
+            const thisCart = this;
+            thisCart.totalNumber = 0;
+            thisCart.subtotalPrice = 0;
+
+            for (const product of thisCart.products) {
+
+                thisCart.subtotalPrice = thisCart.subtotalPrice + product.price;
+                thisCart.totalNumber = thisCart.totalNumber + product.amount;
+            }
+            thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+            console.log(thisCart.totalNumber, thisCart.subtotalPrice, thisCart.totalPrice);
         }
     }
 
@@ -301,8 +316,8 @@
             thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
             thisCartProduct.getElements(element);
             thisCartProduct.initAmountWidget();
-            console.log('new CartProduct', thisCartProduct);
-            console.log('productData', menuProduct);
+            // console.log('new CartProduct', thisCartProduct);
+            // console.log('productData', menuProduct);
         }
         getElements(element) {
             const thisCartProduct = this;
@@ -351,11 +366,11 @@
         },
         init: function() {
             const thisApp = this;
-            console.log('*** App starting ***');
-            console.log('thisApp:', thisApp);
-            console.log('classNames:', classNames);
-            console.log('settings:', settings);
-            console.log('templates:', templates);
+            // console.log('*** App starting ***');
+            // console.log('thisApp:', thisApp);
+            // console.log('classNames:', classNames);
+            // console.log('settings:', settings);
+            // console.log('templates:', templates);
             thisApp.initData();
             thisApp.initMenu();
             thisApp.initCart();
