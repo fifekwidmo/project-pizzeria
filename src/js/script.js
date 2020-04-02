@@ -253,7 +253,9 @@
         }
         announce() {
             const thisWidget = this;
-            const event = new Event('updated');
+            const event = new Event('updated', {
+                bubbles: true
+            });
             thisWidget.element.dispatchEvent(event);
         }
     }
@@ -274,6 +276,28 @@
             thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
             this.dom.productList = document.querySelector(select.cart.productList);
             // console.log(thisCart.dom.toggleTrigger);
+            // new Array
+            thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
+            for (let key of thisCart.renderTotalsKeys) {
+                thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
+            }
+        }
+        update() {
+            const thisCart = this;
+            thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+            thisCart.totalNumber = 0;
+            thisCart.subtotalPrice = 0;
+            for (const product of thisCart.products) {
+                thisCart.subtotalPrice = thisCart.subtotalPrice + product.price;
+                thisCart.totalNumber = thisCart.totalNumber + product.amount;
+            }
+            thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+            // console.log(thisCart.totalNumber, thisCart.subtotalPrice, thisCart.totalPrice);
+            for (let key of thisCart.renderTotalsKeys) {
+                for (let elem of thisCart.dom[key]) {
+                    elem.innerHTML = thisCart[key];
+                }
+            }
         }
         initActions() {
             const thisCart = this;
@@ -290,19 +314,7 @@
             // console.log('thisCart.product', thisCart.products);
             thisCart.update();
         }
-        update() {
-            const thisCart = this;
-            thisCart.totalNumber = 0;
-            thisCart.subtotalPrice = 0;
 
-            for (const product of thisCart.products) {
-
-                thisCart.subtotalPrice = thisCart.subtotalPrice + product.price;
-                thisCart.totalNumber = thisCart.totalNumber + product.amount;
-            }
-            thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-            console.log(thisCart.totalNumber, thisCart.subtotalPrice, thisCart.totalPrice);
-        }
     }
 
     class CartProduct {
