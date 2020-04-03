@@ -168,7 +168,9 @@
             const thisProduct = this;
             const formData = utils.serializeFormToObject(thisProduct.form);
             thisProduct.params = {};
+            // zmienn ponizej powinna zostac zmieniona na products.price?
             let price = dataSource.products[thisProduct.id].price;
+
             for (let param in dataSource.products[thisProduct.id].params) {
                 for (let option in dataSource.products[thisProduct.id].params[param].options) {
                     const img = this.imageWrapper.querySelector(`.${param}-${option}`);
@@ -400,12 +402,12 @@
             const thisApp = this;
             // console.log('thisApp.data:', thisApp.data);
             for (let productData in thisApp.data.products) {
-                new Product(productData, thisApp.data.products[productData]);
+                new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
             }
         },
         initData: function() {
             const thisApp = this;
-            thisApp.data = {};
+            thisApp.data = { products: '' };
             // adres endpointu
             const url = settings.db.url + '/' + settings.db.product;
             // wywołanie zapytania AJAX za pomocą funkcji fetch
@@ -414,8 +416,9 @@
                 .then(parsedResponse => {
                     console.log('parsedResponse', parsedResponse);
                     //save parsedResponse as thisApp.data.products
-
+                    thisApp.data.products = parsedResponse;
                     //execute initMenu method
+                    thisApp.initMenu();
                 });
             console.log('thisApp.data', JSON.stringify(thisApp.data));
         },
@@ -433,7 +436,6 @@
             // console.log('settings:', settings);
             // console.log('templates:', templates);
             thisApp.initData();
-            thisApp.initMenu();
             thisApp.initCart();
         },
     };
