@@ -166,38 +166,47 @@
             const formData = utils.serializeFormToObject(thisProduct.form);
             thisProduct.params = {};
             // zmienn ponizej powinna zostac zmieniona na products.price?
-            let price = dataSource.products[thisProduct.id].price;
-
-            for (let param in dataSource.products[thisProduct.id].params) {
-                for (let option in dataSource.products[thisProduct.id].params[param].options) {
-                    const img = this.imageWrapper.querySelector(`.${param}-${option}`);
-                    if (img) {
-                        img.classList.remove(classNames.menuProduct.imageVisible);
-                    }
+            for (const products of app.data.products) {
+                if (products.id === thisProduct.id) {
+                    thisProduct.price = products.price;
+                }
+                for (let param in products.params) {
                     if (formData[param]) {
-                        if (formData[param].includes(option) && img) {
-                            img.classList.add(classNames.menuProduct.imageVisible);
+                        thisProduct.params[param] = {
+                            label: products.params[param].label,
+                            options: {},
+                        };
+                    }
+                    for (let option in products[param.options]) {
+                        const img = this.imageWrapper.querySelector(`.${param}-${option}`);
+                        if (img) {
+                            img.classList.remove(classNames.menuProduct.imageVisible);
                         }
-                        // przed petla gdzie dodaje obrazek
-                        if (!thisProduct.params[param]) {
-                            thisProduct.params[param] = {
-                                label: dataSource.products[this.id].params[param].label,
-                                options: {},
-                            };
+                        if (formData[param]) {
+                            if (formData[param].includes(option) && img) {
+                                img.classList.add(classNames.menuProduct.imageVisible);
+                            }
+                            // przed petla gdzie dodaje obrazek
+                            if (!thisProduct.params[param]) {
+                                thisProduct.params[param] = {
+                                    label: dataSource.products[this.id].params[param].label,
+                                    options: {},
+                                };
+                            }
+                            thisProduct.params[param].options[option] = dataSource.products[this.id].params[param].options[option].label;
+                            if (formData[param].includes(option) && !products.params[param].options[option].default) {
+                                thisProduct.price = thisProduct.price + products.params[param].options[option].price;
+                            } else if (!formData[param].includes(option) && products.params[param].options[option].default) {
+                                thisProduct.price = thisProduct.price - products.params[param].options[option].price;
+                            }
+                        } else if (products.params[param].options[option].default) {
+                            thisProduct.price = thisProduct.price - products.params[param].options[option].price;
                         }
-                        thisProduct.params[param].options[option] = dataSource.products[this.id].params[param].options[option].label;
-                        if (formData[param].includes(option) && !dataSource.products[thisProduct.id].params[param].options[option].default) {
-                            price = price + dataSource.products[thisProduct.id].params[param].options[option].price;
-                        } else if (!formData[param].includes(option) && dataSource.products[thisProduct.id].params[param].options[option].default) {
-                            price = price - dataSource.products[thisProduct.id].params[param].options[option].price;
-                        }
-                    } else if (dataSource.products[thisProduct.id].params[param].options[option].default) {
-                        price = price - dataSource.products[thisProduct.id].params[param].options[option].price;
                     }
                 }
             }
             /*multiply price by amount*/
-            thisProduct.priceSingle = price;
+            thisProduct.priceSingle = thisProduct.price;
             thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
             /* set the contents of thisProduct.priceElem to be the value of variable price */
             thisProduct.priceElem.innerHTML = thisProduct.price;
