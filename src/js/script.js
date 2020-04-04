@@ -166,10 +166,20 @@
             const formData = utils.serializeFormToObject(thisProduct.form);
             thisProduct.params = {};
             // zmienn ponizej powinna zostac zmieniona na products.price?
-            let price = dataSource.products[thisProduct.id].price;
+            const dataSource = app.data.products;
+            console.log('kekekek');
+            console.log(dataSource);
 
-            for (let param in dataSource.products[thisProduct.id].params) {
-                for (let option in dataSource.products[thisProduct.id].params[param].options) {
+            // let price = dataSource.products[thisProduct.id].price;
+            let price = dataSource.filter(element => element.id == thisProduct.id).price;
+            console.log(price);
+            let index = dataSource.indexOf(dataSource.filter(element => element.id == thisProduct.id));
+            console.log(index);
+            for (let param of dataSource.products[thisProduct.id].params) {
+
+
+
+                for (let option in dataSource.products[thisProduct.id].params[param.id].options) {
                     const img = this.imageWrapper.querySelector(`.${param}-${option}`);
                     if (img) {
                         img.classList.remove(classNames.menuProduct.imageVisible);
