@@ -19,11 +19,19 @@ class Booking {
         thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
         bookingContainer.appendChild(thisBooking.dom.wrapper);
     }
+    announce() {
+        const thisWidget = this;
+        const event = new Event('updated', {
+            bubbles: true
+        });
+        thisWidget.dom.wrapper.dispatchEvent(event);
+    }
     initWidgets() {
         const thisBooking = this;
         thisBooking.dom.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
         thisBooking.dom.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     }
+
 }
 
 export default Booking;
