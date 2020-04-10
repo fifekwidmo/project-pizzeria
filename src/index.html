@@ -8,6 +8,7 @@
     <title>Pizzeria</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/range-slider.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -94,39 +95,39 @@
                 <div class="booking-options">
                     <!-- options -->
                     <label class="booking-option-title"> <!-- option-row -->
-                People
-                <div class="widget-amount people-amount"> <!-- widget-amount -->
-                  <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-                  <input class="amount" type="text" name="people" value="1">
-                  <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
-                </div>
-              </label>
+            People
+            <div class="widget-amount people-amount"> <!-- widget-amount -->
+              <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
+              <input class="amount" type="text" name="people" value="1">
+              <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </div>
+          </label>
                     <label class="booking-option-title"> <!-- option-row -->
-                Hours
-                <div class="widget-amount hours-amount"> <!-- widget-amount -->
-                  <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-                  <input class="amount" type="text" name="hours" value="1">
-                  <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
-                </div>
-              </label>
+            Hours
+            <div class="widget-amount hours-amount"> <!-- widget-amount -->
+              <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
+              <input class="amount hours" type="text" name="hours" value="1">
+              <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </div>
+          </label>
                     <div>
                         <!-- option-row -->
                         <span class="booking-option-title">Starters</span>
                         <div class="checkbox">
                             <!-- checkbox -->
                             <label>
-                    <input type="checkbox" name="starter" value="water">
-                    <span class="checkbox__checkmark"></span>
-                    Water
-                  </label>
+                <input type="checkbox" name="starter" value="water">
+                <span class="checkbox__checkmark"></span>
+                Water
+              </label>
                         </div>
                         <div class="checkbox">
                             <!-- checkbox -->
                             <label>
-                    <input type="checkbox" name="starter" value="bread">
-                    <span class="checkbox__checkmark"></span>
-                    Bread
-                  </label>
+                <input type="checkbox" name="starter" value="bread">
+                <span class="checkbox__checkmark"></span>
+                Bread
+              </label>
                         </div>
                     </div>
                 </div>
@@ -135,9 +136,13 @@
                     <input type="text" name="address" placeholder="Your address">
                     <button type="submit" class="btn-secondary">Book table</button>
                 </div>
+                <div class="edit-booking">
+                    <a class="edit-link-booking" href="##"></a>
+                </div>
             </form>
         </div>
     </script>
+
     <script id="template-cart-product" type="text/x-handlebars-template">
         <li>
             <div class="widget-amount">
@@ -256,6 +261,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="vendor/range-slider.min.js"></script>
     <script src="js/app.js" type="module"></script>
 </body>
 

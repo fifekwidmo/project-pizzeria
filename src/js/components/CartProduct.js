@@ -1,6 +1,5 @@
 import { select } from '/js/settings.js';
 import AmountWidget from './AmountWidget.js';
-
 class CartProduct {
     constructor(menuProduct, element) {
         const thisCartProduct = this;
@@ -13,8 +12,6 @@ class CartProduct {
         thisCartProduct.getElements(element);
         thisCartProduct.initAmountWidget();
         thisCartProduct.initActions();
-        // console.log('new CartProduct', thisCartProduct);
-        // console.log('productData', menuProduct);
     }
     getElements(element) {
         const thisCartProduct = this;
@@ -39,14 +36,11 @@ class CartProduct {
         const thisCartProduct = this;
         thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
         thisCartProduct.dom.amountWidget.addEventListener('updated', function() {
-            // thisCartProduct.processOrder();
             thisCartProduct.amount = thisCartProduct.amountWidget.value;
             thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-            // potencjalny blad
             thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
         });
     }
-
     initActions() {
         const thisCartProduct = this;
         thisCartProduct.dom.edit.addEventListener('click', function() {
@@ -55,7 +49,7 @@ class CartProduct {
         thisCartProduct.dom.remove.addEventListener('click', function() {
             event.preventDefault();
             thisCartProduct.remove();
-            console.log('remove');
+            // console.log('remove');
         });
     }
     remove() {
@@ -69,5 +63,4 @@ class CartProduct {
         thisCartProduct.dom.wrapper.dispatchEvent(event);
     }
 }
-
 export default CartProduct;

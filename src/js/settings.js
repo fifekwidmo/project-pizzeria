@@ -27,19 +27,20 @@ export const select = {
     },
     widgets: {
         amount: {
+            hourInput: '[name="hours"]',
             input: 'input.amount',
             linkDecrease: 'a[href="#less"]',
             linkIncrease: 'a[href="#more"]',
         },
-    },
-    datePicker: {
-        wrapper: '.date-picker',
-        input: `input[name="date"]`,
-    },
-    hourPicker: {
-        wrapper: '.hour-picker',
-        input: 'input[type="range"]',
-        output: '.output',
+        datePicker: {
+            wrapper: '.date-picker',
+            input: 'input[name="date"]',
+        },
+        hourPicker: {
+            wrapper: '.hour-picker',
+            input: 'input[type="range"]',
+            output: '.output',
+        },
     },
     cart: {
         productList: '.cart__order-summary',
@@ -90,9 +91,13 @@ export const classNames = {
 };
 
 export const settings = {
+    hours: {
+        open: 12,
+        close: 24,
+    },
     amountWidget: {
         defaultValue: 1,
-        defaultMin: 1,
+        defaultMin: 0.5,
         defaultMax: 9,
     },
     datePicker: {
@@ -101,15 +106,11 @@ export const settings = {
     cart: {
         defaultDeliveryFee: 20,
     },
-    hours: {
-        open: 12,
-        close: 24,
-    },
     booking: {
         tableIdAttribute: 'data-table',
     },
     db: {
-        url: '//localhost:3131',
+        url: '//' + window.location.hostname + (window.location.hostname == 'localhost' ? ':3131' : ''),
         product: 'product',
         order: 'order',
         booking: 'booking',
