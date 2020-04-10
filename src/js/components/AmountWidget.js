@@ -10,7 +10,7 @@ class AmountWidget extends BaseWidget {
     getElements() {
         const thisWidget = this;
         thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
-        console.log(thisWidget.dom.input);
+        // console.log(thisWidget.dom.input);
         thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
         thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
     }
@@ -26,15 +26,19 @@ class AmountWidget extends BaseWidget {
     initActions() {
         const thisWidget = this;
         thisWidget.dom.input.addEventListener('change', function() {
-            thisWidget.setValue(thisWidget.dom.input.value);
+            event.preventDefault();
+            // thisWidget.setValue(thisWidget.dom.input.value);
+            thisWidget.value = thisWidget.dom.input.value;
         });
         thisWidget.dom.linkDecrease.addEventListener('click', function(event) {
             event.preventDefault();
-            thisWidget.setValue(thisWidget.value - 1);
+            // thisWidget.setValue(thisWidget.value - 1);
+            thisWidget.value = thisWidget.value - 1;
         });
         thisWidget.dom.linkIncrease.addEventListener('click', function(event) {
             event.preventDefault();
-            thisWidget.setValue(thisWidget.value + 1);
+            // thisWidget.setValue(thisWidget.value + 1);
+            thisWidget.value = thisWidget.value + 1;
         });
     }
 }
