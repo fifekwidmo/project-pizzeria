@@ -24,10 +24,11 @@ class DatePicker extends BaseWidget {
                 }
             ],
             locale: {
-                firstDayOfWeek: 1 // start week on Monday
+                firstDayOfWeek: 1, // start week on Monday
             },
-            onChange: function(dateStr) {
+            onChange: function(datesArr, dateStr) {
                 thisWidget.value = dateStr;
+                console.log(datesArr);
             },
         };
         flatpickr(thisWidget.dom.input, options);
@@ -37,7 +38,6 @@ class DatePicker extends BaseWidget {
     }
     isValid() {
         return true;
-        //usunlem (value)
     }
     renderValue() {}
 }

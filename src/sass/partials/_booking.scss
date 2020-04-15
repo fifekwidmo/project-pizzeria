@@ -55,6 +55,7 @@
     top: $base-size;
     background: lighten($color-dark, 70%);
     box-shadow: none;
+    background: $color-success;
     height: $base-size;
     &__handle {
         box-shadow: none;
@@ -77,6 +78,18 @@
         transition: width 100ms;
         box-shadow: none;
     }
+}
+
+.booked-one {
+    background: $color-success;
+}
+
+.booked-two {
+    background: $color-warning;
+}
+
+.booked-all {
+    background: $color-danger;
 }
 
 .flatpickr-day {

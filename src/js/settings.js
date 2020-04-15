@@ -40,6 +40,8 @@ export const select = {
             wrapper: '.hour-picker',
             input: 'input[type="range"]',
             output: '.output',
+            slider: '.rangeSlider__fill',
+            //for task 3
         },
     },
     cart: {
@@ -64,6 +66,9 @@ export const select = {
         peopleAmount: '.people-amount',
         hoursAmount: '.hours-amount',
         tables: '.floor-plan .table',
+        formSubmit: '.order-confirmation [type="submit"]',
+        starters: '[name="starter"]',
+        people: '[name="people"]',
     },
     nav: {
         links: '.main-nav a',
@@ -110,7 +115,7 @@ export const settings = {
         tableIdAttribute: 'data-table',
     },
     db: {
-        url: '//' + window.location.hostname + (window.location.hostname == 'localhost' ? ':3131' : ''),
+        url: '//localhost:3131',
         product: 'product',
         order: 'order',
         booking: 'booking',
