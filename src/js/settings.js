@@ -66,7 +66,7 @@ export const select = {
         peopleAmount: '.people-amount',
         hoursAmount: '.hours-amount',
         tables: '.floor-plan .table',
-        formSubmit: '.order-confirmation [type="submit"]',
+        form: '.booking-form',
         starters: '[name="starter"]',
         people: '[name="people"]',
     },
