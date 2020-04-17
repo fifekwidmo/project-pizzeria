@@ -2,14 +2,12 @@ import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
-
-
-
 const app = {
     initPages: function() {
         const thisApp = this;
         thisApp.pages = document.querySelector(select.containerOf.pages).children;
         thisApp.navLinks = document.querySelectorAll(select.nav.links);
+        thisApp.navLinksHome = document.querySelectorAll(select.nav.linksHome);
         const idFromHash = window.location.hash.replace('#/', '');
         let pageMatchingHash = thisApp.pages[0].id;
         for (let page of thisApp.pages) {

@@ -109,6 +109,39 @@ export class Booking {
                 table.classList.remove(classNames.booking.tableBooked);
             }
         }
+        const openHour = 12;
+        const endHour = 24;
+        const midnight = 0;
+        const half = .5;
+        let slider = document.getElementsByClassName('rangeSlider')[0];
+        let color = '';
+        for (let index = openHour; index <= endHour; index = index + half) {
+            let hour = index;
+            if (hour === endHour) {
+                hour = midnight;
+            }
+            let tables = 0;
+            if (
+                typeof thisBooking.booked[thisBooking.date] === 'undefined' ||
+                typeof thisBooking.booked[thisBooking.date][hour] === 'undefined'
+            ) {
+                tables = 0;
+            } else {
+                tables = thisBooking.booked[thisBooking.date][hour].length;
+            }
+            if (tables === 0) {
+                color = color + ', #78e08f ';
+            } else if (tables === 1) {
+                color = color + ', yellow ';
+            } else if (tables === 2) {
+                color = color + ', orange ';
+            } else {
+                color = color + ', red ';
+            }
+        }
+        let newColor = 'linear-gradient(to right' + color + ')';
+        slider.style.backgroundImage = newColor;
+        // console.log(newColor);
     }
     render(paramElem) {
         const thisBooking = this;

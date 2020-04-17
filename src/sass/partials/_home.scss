@@ -1,0 +1,60 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.first-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+    border: 1px solid black;
+}
+
+.open {
+    border: 1px solid black;
+    // flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.tile {
+    border: 1px solid black;
+    // flex-grow: 2;
+    flex-basis: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 960px;
+    border: 1px solid black;
+}
+
+.cards img {
+    margin: 10px;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.3);
+    flex-basis: 25%;
+    width: 280px;
+    height: 280px;
+}
