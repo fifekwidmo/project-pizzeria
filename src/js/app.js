@@ -8,6 +8,8 @@ const app = {
         thisApp.pages = document.querySelector(select.containerOf.pages).children;
         thisApp.navLinks = document.querySelectorAll(select.nav.links);
         thisApp.navLinksHome = document.querySelectorAll(select.nav.linksHome);
+        thisApp.buttonLinks = document.querySelectorAll('.links');
+        console.log(thisApp.buttonLinks);
         const idFromHash = window.location.hash.replace('#/', '');
         let pageMatchingHash = thisApp.pages[0].id;
         for (let page of thisApp.pages) {
@@ -18,6 +20,18 @@ const app = {
         }
         thisApp.activatePage(pageMatchingHash);
         for (let link of thisApp.navLinks) {
+            link.addEventListener('click', function(event) {
+                const clickedElement = this;
+                event.preventDefault();
+                // get id from href attrubite
+                const id = clickedElement.getAttribute('href').replace('#', '');
+                // run thisApp.activatePage with that id
+                thisApp.activatePage(id);
+                //change URL hash
+                window.location.hash = '#/' + id;
+            });
+        }
+        for (let link of thisApp.buttonLinks) {
             link.addEventListener('click', function(event) {
                 const clickedElement = this;
                 event.preventDefault();
