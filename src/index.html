@@ -10,7 +10,11 @@
     <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="vendor/range-slider.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="vendor/glide/glide.core.min.css">
+    <link rel="stylesheet" href="vendor/glide/glide.theme.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+
 </head>
 
 <body>
@@ -80,38 +84,62 @@
                     </a>
                     <div class="open-hours">
                         <a href=""></a>
-                        <h3>Opening hours</h3>
+                        <h3>Opening hours:</h3>
                         <h4>Tue-San 12:00-24:00</h4>
                         </a>
                     </div>
                 </div>
                 <div class="slider-section">
-                    <div class="box-1 active-slide">
-                        <div class="photo">
+                    <div class="glide">
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                <li class="glide__slide">
+                                    <div class="box-1 ">
+                                        <div class="photo">
+                                        </div>
+                                        <div class="description">
+                                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium
+                                                totam nostrum officia!</br>
+                                                </br>
+                                                <span> - Eva Green</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="box-2 ">
+                                        <div class="photo"></div>
+                                        <div class="description">
+                                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium
+                                                totam nostrum officia!</br>
+                                                </br>
+                                                <span> - Ela Ela</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="glide__slide">
+                                    <div class="box-3 ">
+                                        <div class="photo"></div>
+                                        <div class="description">
+                                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium
+                                                totam nostrum officia!</br>
+                                                </br>
+                                                <span> - Madzia Gessler</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
 
+                            </ul>
                         </div>
-                        <div class="description">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium totam nostrum
-                                officia!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="box-2 off-slide">
-                        <div class="photo"></div>
-                        <div class="description">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium totam nostrum
-                                officia!
-                            </p>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <button class="glide__bullet" data-glide-dir="=0"></button>
+                            <button class="glide__bullet" data-glide-dir="=1"></button>
+                            <button class="glide__bullet" data-glide-dir="=2"></button>
                         </div>
                     </div>
-                    <div class="box-3 off-slide">
-                        <div class="photo"></div>
-                        <div class="description">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium dolore qui aperiam velit deserunt iste sequi. Doloremque, temporibus? Blanditiis, eum! Eius dolores deserunt error consequuntur quam laudantium totam nostrum
-                                officia!
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="gallery">
                     <div class="image">
@@ -340,7 +368,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="vendor/range-slider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
     <script src="js/app.js" type="module"></script>
+    <script>
+    </script>
 </body>
 
 </html>

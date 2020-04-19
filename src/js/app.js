@@ -2,6 +2,8 @@ import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+/* global Glide */
+
 const app = {
     initPages: function() {
         const thisApp = this;
@@ -44,6 +46,7 @@ const app = {
             });
         }
     },
+
     activatePage: function(pageId) {
         const thisApp = this;
         for (let page of thisApp.pages) {
@@ -99,9 +102,24 @@ const app = {
         // console.log('settings:', settings);
         // console.log('templates:', templates);
         thisApp.initPages();
+        thisApp.initSlider();
         thisApp.initData();
         thisApp.initCart();
         thisApp.initBooking();
     },
+    initSlider: function() {
+        const config = {
+            type: 'carousel',
+            autoplay: 5000,
+            dots: '.dots',
+        };
+        new Glide('.glide', config).mount();
+    },
 };
+
+
+
+
+
+
 app.init();

@@ -6,9 +6,8 @@
 
 .wrapper {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 1% auto;
     padding: 0 20px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -22,12 +21,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
     width: 90%;
-    border: 1px solid black;
 }
 
 .open-hours {
-    border: 1px solid black;
-    // flex-grow: 1;
     flex-basis: 100%;
     margin-top: 10px;
     background-color: $color-main;
@@ -36,17 +32,18 @@
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
+        font-size: 35px;
     }
     h4 {
         color: $color-light;
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
+        font-size: 25px;
     }
 }
 
 .tile1 {
-    border: 1px solid black;
     background-image: url(../../images/assets/pizza-1.jpg);
     text-align: center;
     height: 30vh;
@@ -55,7 +52,7 @@
         color: $color-light;
         text-transform: uppercase;
         font-weight: bold;
-        line-height: 19vh;
+        line-height: 29vh;
         font-size: 40px;
         transition: 0.5s linear;
     }
@@ -80,11 +77,10 @@
 
 .tile1:hover h3 {
     display: block;
-    line-height: 4vh;
+    line-height: 11vh;
 }
 
 .tile2 {
-    border: 1px solid black;
     background-image: url(../../images/assets/pizza-2.jpg);
     text-align: center;
     height: 30vh;
@@ -93,7 +89,7 @@
         color: $color-light;
         text-transform: uppercase;
         font-weight: bold;
-        line-height: 19vh;
+        line-height: 29vh;
         transition: 0.5s linear;
         font-size: 40px;
     }
@@ -118,7 +114,7 @@
 
 .tile2:hover h3 {
     display: block;
-    line-height: 4vh;
+    line-height: 11vh;
 }
 
 .links {
@@ -128,7 +124,6 @@
 }
 
 .gallery {
-    // min-height: 100vh;
     overflow: hidden;
     width: 100%;
     padding: 1rem;
@@ -144,7 +139,6 @@
 .image {
     overflow: hidden;
     height: 300px;
-    // width: 350px;
     position: relative;
     cursor: pointer;
     margin: 15px 15px;
@@ -204,7 +198,6 @@ img {
 
 //slider
 .slider-section {
-    border: 1px black solid;
     height: 35vh;
     width: 80%;
 }
@@ -242,10 +235,17 @@ img {
     padding: 10px;
 }
 
-.off-slide {
-    display: none;
+.box-1 .description p span,
+.box-2 .description p span,
+.box-3 .description p span {
+    font-style: italic;
+    font-weight: bold;
 }
 
-.active-slide {
-    display: flex;
+.glide__bullet {
+    background-color: #333333;
+}
+
+.glide__bullet--active {
+    background-color: #FF6B6B;
 }
